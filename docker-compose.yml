@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - auth-service
+      - flight-service
+      - booking-service
+      - hotel-service
+      - notification-service
+
+  auth-service:
+    build: ./services/auth-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongodb
+
+  flight-service:
+    build: ./services/flight-service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mongodb
+      - redis
+
+  booking-service:
+    build: ./services/booking-service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - mongodb
+
+  hotel-service:
+    build: ./services/hotel-service
+    ports:
+      - "5005:5005"
+    depends_on:
+      - mongodb
+
+  notification-service:
+    build: ./services/notification-service
+    ports:
+      - "5006:5006"
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:

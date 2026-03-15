@@ -1,0 +1,40 @@
+# TripNest API Testing Instructions
+
+## 1. Register a User
+
+**Linux/macOS/WSL/Container Bash:**
+```
+curl -X POST http://localhost:5000/auth/register -H "Content-Type: application/json" -d '{"name":"Test User","email":"test@example.com","password":"password123"}'
+```
+
+**Windows PowerShell:**
+```
+$body = '{"name":"Test User","email":"test@example.com","password":"password123"}'
+Invoke-RestMethod -Uri "http://localhost:5000/auth/register" -Method Post -Body $body -ContentType "application/json"
+```
+
+## 2. Login
+
+**Linux/macOS/WSL/Container Bash:**
+```
+curl -X POST http://localhost:5000/auth/login -H "Content-Type: application/json" -d '{"email":"test@example.com","password":"password123"}'
+```
+
+**Windows PowerShell:**
+```
+$body = '{"email":"test@example.com","password":"password123"}'
+Invoke-RestMethod -Uri "http://localhost:5000/auth/login" -Method Post -Body $body -ContentType "application/json"
+```
+
+## 3. General Notes
+- Always use double quotes for JSON keys and values.
+- Use the correct endpoint and port (API Gateway: 5000).
+- For other services (flights, bookings, hotels, notifications), follow the same pattern.
+- If you get a JSON parse error, check your quotes and JSON formatting.
+
+---
+
+**If you need to test from inside a Docker container:**
+- Use `curl` as shown above, but target `http://api-gateway:5000/...` from within the Docker network.
+
+**If you need to test other endpoints, copy the pattern above and adjust the URL and body.**
