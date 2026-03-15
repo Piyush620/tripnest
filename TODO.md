@@ -3,29 +3,29 @@
 ## Priority 1: Core Backend Completion
 
 ### Payment Service
-- [ ] Set up Express server and routes
-- [ ] Connect to MongoDB
-- [ ] Create Payment model/schema
-- [ ] Implement payment creation endpoint (POST /payments)
-- [ ] Implement payment status check endpoint (GET /payments/:id)
-- [ ] Implement payment history endpoint (GET /payments/user/:userId)
-- [ ] Add error handling and validation
-- [ ] Test all payment endpoints
+- [x] Set up Express server and routes
+- [x] Connect to MongoDB
+- [x] Create Payment model/schema
+- [x] Implement payment creation endpoint (POST /payments)
+- [x] Implement payment status check endpoint (GET /payments/:id)
+- [x] Implement payment history endpoint (GET /payments/user/:userId)
+- [x] Add error handling and validation
+- [x] Test all payment endpoints
 
 ### Database Models & Validation
-- [ ] Add email validation on User model
-- [ ] Add date validation on Booking (check-in/check-out dates)
-- [ ] Add price validation (cannot be negative)
-- [ ] Add seat availability check on Flight
-- [ ] Create database indexes for:
-  - [ ] User.email (unique)
-  - [ ] Flight (from, to, departureTime)
-  - [ ] Hotel (location)
-  - [ ] Booking (userId, flightId, status)
-  - [ ] Notification (userId, sentAt)
+- [x] Add email validation on User model
+- [x] Add date validation on Booking (check-in/check-out dates)
+- [x] Add price validation (cannot be negative)
+- [x] Add seat availability check on Flight
+- [x] Create database indexes for:
+  - [x] User.email (unique)
+  - [x] Flight (from, to, departureTime)
+  - [x] Hotel (location)
+  - [x] Booking (userId, flightId, status)
+  - [x] Notification (userId, sentAt)
 
 ### API Gateway Enhancements
-- [ ] Add request validation middleware
+- [x] Add request validation middleware (error propagation working)
 - [ ] Add request logging
 - [ ] Add response compression
 - [ ] Add security headers (helmet)
@@ -52,9 +52,9 @@
 - [ ] Validate enum values (notification types, booking status)
 
 ### Error Handling
-- [ ] Standardize error response format across all services
-- [ ] Add proper HTTP status codes (400, 401, 403, 404, 500)
-- [ ] Remove sensitive info from error messages
+- [x] Standardize error response format across all services
+- [x] Add proper HTTP status codes (400, 401, 403, 404, 500)
+- [x] Remove sensitive info from error messages
 - [ ] Add error logging
 
 ---
@@ -256,23 +256,36 @@
 
 ### Backend Services
 - ✅ Auth Service (register, login with error handling)
-- ✅ Flight Service (create, search, get)
-- ✅ Hotel Service (create, search, get)
-- ✅ Booking Service (create, retrieve, cancel)
+- ✅ Flight Service (create, search, get with validation)
+- ✅ Hotel Service (create, search, get with validation)
+- ✅ Booking Service (create, retrieve, cancel with validation)
 - ✅ Notification Service (send, receive)
+- ✅ Payment Service (create, process, refund, statistics)
 - ✅ API Gateway (routing, error propagation)
 
 ### Infrastructure
 - ✅ Docker setup for all services
-- ✅ MongoDB connection
+- ✅ MongoDB connection with authentication
 - ✅ Redis caching setup
 - ✅ MongoDB authentication
 
-### Error Handling
+### Error Handling & Validation
 - ✅ Duplicate email validation
+- ✅ Price validation (non-negative)
+- ✅ Email format validation
+- ✅ Passenger limits validation
+- ✅ Date field validation
 - ✅ Error handling in all controllers
 - ✅ Error propagation through API Gateway
 - ✅ Non-blocking FCM errors
+- ✅ Proper HTTP status codes
+
+### Database Optimization
+- ✅ User model indexes (email unique)
+- ✅ Flight model indexes (route, date, status)
+- ✅ Hotel model indexes (location, rating, text-search)
+- ✅ Booking model indexes (userId, flightId, status)
+- ✅ Payment model indexes (userId, bookingId, status)
 
 ---
 
