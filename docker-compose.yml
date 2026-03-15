@@ -26,6 +26,7 @@ services:
       - booking-service
       - hotel-service
       - notification-service
+      - payment-service
 
   auth-service:
     build: ./services/auth-service
@@ -46,6 +47,13 @@ services:
     build: ./services/booking-service
     ports:
       - "5003:5003"
+    depends_on:
+      - mongodb
+
+  payment-service:
+    build: ./services/payment-service
+    ports:
+      - "5004:5004"
     depends_on:
       - mongodb
 

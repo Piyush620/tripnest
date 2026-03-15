@@ -19,6 +19,7 @@ const SERVICES = {
   AUTH: "http://auth-service:5001",
   FLIGHT: "http://flight-service:5002",
   BOOKING: "http://booking-service:5003",
+  PAYMENT: "http://payment-service:5004",
   HOTEL: "http://hotel-service:5005",
   NOTIFICATION: "http://notification-service:5006"
 }
@@ -64,6 +65,11 @@ app.use("/flights", (req, res) => {
 // BOOKINGS
 app.use("/bookings", (req, res) => {
   forwardRequest(SERVICES.BOOKING, req, res)
+})
+
+// PAYMENTS
+app.use("/payments", (req, res) => {
+  forwardRequest(SERVICES.PAYMENT, req, res)
 })
 
 // HOTELS
